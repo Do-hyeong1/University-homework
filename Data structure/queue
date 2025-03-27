@@ -1,0 +1,77 @@
+package Queue;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Queue {
+	
+	private int[] arr = new int[2000000];
+	private int fr = 0;
+	private int ba = 0;
+	
+	public int Pop(){
+		if(Size() == 0) return -1;
+		else {
+			int x = arr[fr];
+			fr = (fr + 1) % arr.length; 
+			return x;
+		}
+	}
+	public void Push(int X){
+		arr[ba] = X;
+		ba = (ba + 1) % arr.length;
+	}
+	public int Size(){
+		return (ba - fr);
+	}
+	public int Empty(){
+		if (Size() == 0) return 1;
+		else return 0;
+	}
+	public int Front(){
+		if (Size() == 0) return -1;
+		else return arr[fr];
+	}
+	public int Back(){
+		if (Size() == 0) return -1;
+		else return arr[ba-1];
+	}
+	
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		Queue qq = new Queue();
+		
+		int n = Integer.parseInt(st.nextToken());
+		
+		
+		String str = null;
+		for(int i = 0; i < n; i++) {
+			str = br.readLine();
+			if(str.contains("pus")) {
+				str = str.replaceAll("[^0-9]", "");
+				qq.Push(Integer.parseInt(str, 10));
+			}
+			else if(str.contains("pop"))			
+				sb.append(qq.Pop()).append('\n');
+			else if(str.contains("size"))
+				sb.append(qq.Size()).append('\n');
+				
+			else if(str.contains("empt"))
+				sb.append(qq.Empty()).append('\n');
+			else if(str.contains("fro"))
+				sb.append(qq.Front()).append('\n');
+			else if(str.contains("bac"))
+				sb.append(qq.Back()).append('\n');
+			else
+				continue;
+			
+		}
+		System.out.println(sb);
+		
+	}
+}
