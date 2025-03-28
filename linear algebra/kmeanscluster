@@ -1,0 +1,19 @@
+import random
+import sys
+import numpy
+
+
+
+def kmeansClustering(flie, k, iterations):
+    return ()
+
+
+filename = input("파일 이름을 입력 : ") # 5-vector
+k = int(input("k value 입력")) # k group
+iterations = int(input("maximum number of iterations 입력"))
+
+kGorup = numpy.array(range(30)).reshape(k,5)
+
+
+
+file = open(filename, "r")
